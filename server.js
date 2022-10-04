@@ -22,6 +22,9 @@ const promptUser = () => {
             message: 'What would you like to do?',
             choices: ['View all departments', 'View all roles', 'View all employees', 'Add a department', 'Add a role', 'Add an employee', 'Add an employee role']
         },
+        // view all dpts
+        // view all roles
+        // view all employees
         {
             type: 'input',
             name: 'inputDpt',
