@@ -21,29 +21,187 @@ const promptUser = () => {
             name: 'directory',
             message: 'What would you like to do?',
             choices: ['View all departments', 'View all roles', 'View all employees', 'Add a department', 'Add a role', 'Add an employee', 'Add an employee role']
-        },
-        // view all dpts
-        // view all roles
-        // view all employees
+        }
+
+    ]);
+};
+
+//View all Roles Prompt
+const viewAllRoles = () => {
+    return inquirer.prompt([
+
+    ]);
+;}
+
+//View all Employees Prompt
+const viewAllEmps = () => {
+    return inquirer.prompt([
+
+    ]);
+;}
+
+//View all Departments Prompt
+const viewAllDpts = () => {
+    return inquirer.prompt([
+        //departments are displayed
+    ]);
+;}
+//Add Departmnet Prompt
+const inputDpt = () => {
+    return inquirer.prompt([
         {
             type: 'input',
             name: 'inputDpt',
-            message: 'What is the name of the department?'
+            message: 'What is the name of the department?',
+            validate: inputDpt => {
+                if (inputDpt) {
+                    return true;
+                } else {
+                    console.log('Please enter the title of the department.')
+                    return false;
+                }
+            }
+        }
+    ]);
+};
+
+// Add Role Prompt
+const inputRole = () => {
+    return inquirer.prompt([
+        {
+            type: 'input',
+            name: 'inputRoleName',
+            message: 'What is title of the role?',
+            validate: inputRoleName => {
+                if (inputRoleName) {
+                    return true;
+                } else {
+                    console.log('Please enter title.');
+                    return false;
+                }
+            }
         },
         {
             type: 'input',
-            name: 'inputRole',
-            message: 'What is the name of the role?'
+            name: 'inputRoleSalary',
+            message: 'What is the annual salary?',
+            validate: inputRoleSalary => {
+                if (inputRoleSalary) {
+                    return true;
+                } else {
+                    console.log('Please enter salary.');
+                    return false;
+                }
+            }
         },
         {
             type: 'input',
-            name: 'inputEmp',
-            message: 'What is the name of the employee?'
+            name: 'inputRoleDpt',
+            message: 'Whats the department number?',
+            validate: inputRoleDpt => {
+                if (inputRoleDpt) {
+                    return true;
+                } else {
+                    console.log('Please enter the departmnet number.');
+                    return false;
+                }
+            }
+        }
+    ]);
+};
+
+//Add Employee Prompt
+const inputEmp = () => {
+    return inquirer.prompt([
+        {
+            type: 'input',
+            name: 'firstName',
+            message: 'What is the employees first name?',
+            validate: firstName => {
+                if (firstName) {
+                    return true;
+                } else {
+                    console.log('Please enter their first name.');
+                    return false;
+                }
+            }
         },
         {
             type: 'input',
-            name: 'updateEmpRole',
-            message: 'What is the name of the updated employee role?'
+            name: 'lastName',
+            message: 'What is the employees last name?',
+            validate: lastName => {
+                if (lastName) {
+                    return true;
+                } else {
+                    console.log('Please enter their last name.');
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'empRole',
+            message: 'What is the employees role?',
+            validate: empRole => {
+                if (empRole) {
+                    return true;
+                } else {
+                    console.log('Please enter their role.');
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'empMngr',
+            message: 'Who is their manager(insert employee id for manager instead of name?',
+            validate: empMngr => {
+                if (empMngr) {
+                    return true;
+                } else {
+                    console.log('Please enter the number found first on the left hand side of an employee.');
+                    return false;
+                }
+            }
+        }
+    ]);
+};
+
+//Update Employee Prompt
+const updateEmpRole = () => {
+    return inquirer.prompt([
+        {
+            type: 'input',
+            name: 'selectEmp',
+            message: 'Select the employee.',
+            choice: ''
+        },
+        {
+            type: 'input',
+            name: 'updatedRole',
+            message: 'What is their new role?',
+            validate: updatedRole => {
+                if (updatedRole) {
+                    return true;
+                } else {
+                    console.log('Please enter their new role.');
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'updatedNum',
+            message: 'What the department number?',
+            validate: updatedNum => {
+                if (updatedNum) {
+                    return true;
+                } else {
+                    console.log('Please enter their department number.');
+                    return false;
+                }
+            }
         }
     ]);
 };
@@ -57,8 +215,6 @@ app.get('/', (req, res) => {
         message: 'Hello World'
     });
 });
-
-
 
 //Function will start Express.js server on port 3001
 app.listen(PORT, () => {
