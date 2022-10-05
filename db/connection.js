@@ -1,3 +1,4 @@
+//Connects MySQL to database
 const mysql = require('mysql2');
 
 //Connect to database
@@ -9,7 +10,7 @@ const db = mysql.createConnection (
         user: '',
         //Your Password
         password: '',
-        database: ''
+        database: 'department'
     },
     console.log('Connected to the election database.')
 );

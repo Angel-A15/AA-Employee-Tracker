@@ -1,18 +1,24 @@
 //Connects mySql and function of queries
 const mysql = require('mysql2');
+//Connects to Connection.js
+const db = require('./db/connection');
+//Links inquirer
+const inquirer = require('inquirer');
+
+
 //Links to express package
 const express = require('express');
 //Will instantitate the server
 const app = express();
-//Links inquirer
-const inquirer = require('inquirer');
+
 //Port for server to run in
 const PORT = process.env.PORT || 3001;
+
 //Express Middleware
 app.use(express.urlencoded({extended: false}));
 app.use(express.json())
 
-//Directory pronpts
+//Directory Prompt
 const promptUser = () => {
 
     return inquirer.prompt([
@@ -20,7 +26,14 @@ const promptUser = () => {
             type: 'list',
             name: 'directory',
             message: 'What would you like to do?',
-            choices: ['View all departments', 'View all roles', 'View all employees', 'Add a department', 'Add a role', 'Add an employee', 'Add an employee role']
+            choices: [
+            'View all departments', 
+            'View all roles', 
+            'View all employees', 
+            'Add a department', 
+            'Add a role', 
+            'Add an employee', 
+            'Add an employee role']
         }
 
     ]);
