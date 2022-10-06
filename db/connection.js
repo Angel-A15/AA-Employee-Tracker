@@ -1,7 +1,7 @@
 //Connects MySQL to database
 const mysql = require('mysql2');
 
-//Connect to database with credentials
+//Connect to database with your MySQL credentials
 const db = mysql.createConnection (
     process.env.DB_NAME,
     process.env.DB_USER,

@@ -11,12 +11,6 @@ const express = require('express');
 //Will instantitate the server
 const app = express();
 
-//Port for server to run in
-const PORT = process.env.PORT || 3001;
-
-//Express Middleware
-app.use(express.urlencoded({extended: false}));
-app.use(express.json())
 
 //Directory Prompt
 const promptUser = () => {
@@ -59,6 +53,7 @@ const viewAllDpts = () => {
         //departments are displayed
     ]);
 ;}
+
 //Add Departmnet Prompt
 const inputDpt = () => {
     return inquirer.prompt([
@@ -77,6 +72,19 @@ const inputDpt = () => {
         }
     ]);
 };
+
+//Function to add department
+const addDepartment = async() => {
+    const result = await inquirer.prompt(inputDpt)
+    const sql = `INSERT INTO department (name)
+    VALUES (?)`;
+    const params = [result.name];
+
+    db.query(sql, params, function(err, results) {
+        console.log("");
+        console.table(results);
+    })
+}
 
 // Add Role Prompt
 const inputRole = () => {
@@ -122,6 +130,20 @@ const inputRole = () => {
         }
     ]);
 };
+
+//Function to add role
+const addRole = async() => {
+    const result = await inquirer.prompt(inputRole)
+    const sql = `INSERT INTO role (title, salary, department_id)
+    VALUES (?,?,?)`;
+    const params = [result.title, result.salary, result.department];
+
+    db.query(sql, params, function(err, results) {
+        console.log("");
+        console.table(results);
+    })
+}
+
 
 //Add Employee Prompt
 const inputEmp = () => {
@@ -181,6 +203,19 @@ const inputEmp = () => {
     ]);
 };
 
+//Funcion to add Employee
+const addEmp = async() => {
+    const result = await inquirer.prompt(inputEmp)
+    const sql = `INSERT INTO employee (first_name, last_name, role_id, manager_id)
+    VALUES (?,?,?,?)`;
+    const params = [result.first_name, result.last_name, result.role_id, result.manager_id];
+
+    db.query(sql, params, function (err, results) {
+        console.log("");
+        console.table(results);
+    });
+}
+
 //Update Employee Prompt
 const updateEmpRole = () => {
     return inquirer.prompt([
@@ -219,17 +254,20 @@ const updateEmpRole = () => {
     ]);
 };
 
+//Function to update employee
+const updateEmp = async () => {
+    const result = await inquirer.prompt(updateEmpRole)
+    const sql = `INSERT INTO employee (first_name, last_name, role_id, manager_id)
+    VALUES (?,?,?,?)`;
+    const params = [result.first_name, result.last_name, result.role_id, result.manager_id];
+
+    db.query(sql, params, function (err, results) {
+        console.log("");
+        console.table(results);
+    });
+}
+
+
 promptUser().then(answers => console.log(answers));
 
 
-//Get route to test function; current status: MODULE_NOT_FOUND
-app.get('/', (req, res) => {
-    res.json({
-        message: 'Hello World'
-    });
-});
-
-//Function will start Express.js server on port 3001
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
