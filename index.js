@@ -1,15 +1,10 @@
-//Connects mySql and function of queries
-const mysql = require('mysql2');
 //Connects to Connection.js
 const db = require('./db/connection');
 //Links inquirer
 const inquirer = require('inquirer');
+//Allows to work with database
+const cTable = require('console.table');
 
-
-//Links to express package
-const express = require('express');
-//Will instantitate the server
-const app = express();
 
 
 //Directory Prompt
