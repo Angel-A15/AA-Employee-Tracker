@@ -26,6 +26,6 @@ The user will need to have these installed before usage:
   * Express
   
 ## Usage
-To start the app, enter "node server.js" into the terminal and then select which directory you want
+To start the app, enter "npm start" into the terminal and then select which directory you want
 
-## Walkthrough Video
+## Walkthrough Video Link
