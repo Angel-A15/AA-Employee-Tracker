@@ -18,6 +18,10 @@ Her ideal layout for the application is as follows:
   * Selecting "update an employee role" should ask user which employee to select and update, then add to database when done
   
 ## Description
+in order to meet my clients requests, I executed the following:
+ * Added a series of prompts that gather information the user entered and for guidance
+ * Sql files to represent what the expected layout of the database tables the user will be constructing
+ * Using MySQL and NPM, the application will add and alter data based on the users input
 
 ## Installation
 The user will need to have these installed before usage:
