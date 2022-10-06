@@ -64,7 +64,7 @@ const addDepartment = async() => {
         console.table(results);
     });
     //Added at end of each function to redirect user to the main directory
-    startMenu();
+    startDirectory();
 }
 
 // Add Role Prompt
@@ -124,7 +124,7 @@ const addRole = async() => {
         console.table(results);
     });
 
-    startMenu();
+    startDirectory();
 }
 
 
@@ -198,7 +198,7 @@ const addEmp = async() => {
         console.table(results);
     });
 
-    startMenu();
+    startDirectory();
 }
 
 //Update Employee Prompts:Selects employee
@@ -254,9 +254,49 @@ const updateEmp = async () => {
         console.log("");
         console.table(results);
     });
-    startMenu();
+    startDirectory();
 }
 
+//Will go to main menu after comppleting selection
+var startDirectory = function() {
+    switch(result.promptUser) {
+        
+        case "view all departments":
+            db.query('SELECT * FROM department', function(err, results) {
+                console.log("");
+                console.table(results);
+            });
+            startDirectory();
+            break;
+        case "view all roles":
+            db.query('SELECT * FROM role', function(err, results) {
+                console.log("");
+                console.table(results);
+            });
+            startDirectory();
+            break;
+        case "view all employees":
+            db.query('SELECT * FROM employee', function(err, results) {
+                console.log("");
+                console.table(results);
+            });
+            startDirectory();
+            break;
+        case "add a department":
+            addDepartment();
+            break;
+        case "add a role":
+            addRole();
+            break;
+        case "add employee":
+            addEmp();
+            break;
+        case "update an employee":
+            updateEmp();
+            break;
+
+    }
+};
 
 
 promptUser().then(answers => console.log(answers));
