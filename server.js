@@ -33,27 +33,6 @@ const promptUser = () => {
     ]);
 };
 
-//View all Roles Prompt
-const viewAllRoles = () => {
-    return inquirer.prompt([
-
-    ]);
-;}
-
-//View all Employees Prompt
-const viewAllEmps = () => {
-    return inquirer.prompt([
-
-    ]);
-;}
-
-//View all Departments Prompt
-const viewAllDpts = () => {
-    return inquirer.prompt([
-        //departments are displayed
-    ]);
-;}
-
 //Add Departmnet Prompt
 const inputDpt = () => {
     return inquirer.prompt([
@@ -83,7 +62,9 @@ const addDepartment = async() => {
     db.query(sql, params, function(err, results) {
         console.log("");
         console.table(results);
-    })
+    });
+    //Added at end of each function to redirect user to the main directory
+    startMenu();
 }
 
 // Add Role Prompt
@@ -141,7 +122,9 @@ const addRole = async() => {
     db.query(sql, params, function(err, results) {
         console.log("");
         console.table(results);
-    })
+    });
+
+    startMenu();
 }
 
 
@@ -214,10 +197,12 @@ const addEmp = async() => {
         console.log("");
         console.table(results);
     });
+
+    startMenu();
 }
 
-//Update Employee Prompt
-const updateEmpRole = () => {
+//Update Employee Prompts:Selects employee
+const selEmp = () => {
     return inquirer.prompt([
         {
             type: 'input',
@@ -225,6 +210,12 @@ const updateEmpRole = () => {
             message: 'Select the employee.',
             choice: ''
         },
+    ])
+};
+
+//Updates role
+const updateEmpRole = () => {
+    return inquirer.prompt([
         {
             type: 'input',
             name: 'updatedRole',
@@ -237,24 +228,22 @@ const updateEmpRole = () => {
                     return false;
                 }
             }
-        },
-        {
-            type: 'input',
-            name: 'updatedNum',
-            message: 'What the department number?',
-            validate: updatedNum => {
-                if (updatedNum) {
-                    return true;
-                } else {
-                    console.log('Please enter their department number.');
-                    return false;
-                }
-            }
         }
     ]);
 };
 
-//Function to update employee
+//Functions to update employee
+//Selects employee
+const selectEmp = async () => {
+    const result = await inquirer.prompt(selEmp);
+    db.query('SELECT role.id, role.title FROM role', function (err, results) {
+        console.log("");
+        console.log.table(results);
+    });
+    updateEmp(result.employee_id);
+}
+
+//Adds fields to the employee
 const updateEmp = async () => {
     const result = await inquirer.prompt(updateEmpRole)
     const sql = `INSERT INTO employee (first_name, last_name, role_id, manager_id)
@@ -265,7 +254,9 @@ const updateEmp = async () => {
         console.log("");
         console.table(results);
     });
+    startMenu();
 }
+
 
 
 promptUser().then(answers => console.log(answers));
