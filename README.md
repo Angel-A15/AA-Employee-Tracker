@@ -27,7 +27,7 @@ in order to meet my clients requests, I executed the following:
 The user will need to have these installed before usage:
   * NPM Inquirer
   * mySQL2
-  * Express
+  * console.table package
   
 ## Usage
 To start the app, enter "npm start" into the terminal and then select which directory you want
