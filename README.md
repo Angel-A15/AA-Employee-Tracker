@@ -33,3 +33,4 @@ The user will need to have these installed before usage:
 To start the app, enter "npm start" into the terminal and then select which directory you want
 
 ## Walkthrough Video Link
+https://watch.screencastify.com/v/Lm3jJqTbytv62Hyuw5J8
